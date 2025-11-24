@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EpisLang — Документация v1.0.7</title>
+  <style>
+    :root{--bg:#0f1720;--card:#0b1220;--muted:#94a3b8;--accent:#7c3aed;--mono:ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace}
+    body{font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:linear-gradient(180deg,#071029 0%, #081226 100%); color:#e6eef8; margin:0; padding:32px}
+    .wrap{max-width:1000px; margin:0 auto}
+    header{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+    header h1{margin:0;font-size:24px}
+    header .meta{color:var(--muted); font-size:13px}
+    nav{background:rgba(255,255,255,0.02); padding:12px;border-radius:8px;margin-bottom:18px}
+    nav a{color:#bfe1ff; text-decoration:none; display:inline-block; margin-right:12px; font-size:14px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:18px; border-radius:10px; box-shadow:0 6px 18px rgba(2,6,23,0.6); margin-bottom:14px}
+    h2{margin-top:0}
+    pre{background:#021022;padding:12px;border-radius:6px;overflow:auto;font-family:var(--mono);font-size:13px;color:#dbeafe}
+    code{background:rgba(255,255,255,0.02);padding:2px 6px;border-radius:4px}
+    table{width:100%;border-collapse:collapse;margin-top:8px}
+    td,th{padding:8px;border-top:1px solid rgba(255,255,255,0.03);text-align:left}
+    .muted{color:var(--muted)}
+    .note{background:linear-gradient(90deg, rgba(124,58,237,0.08), rgba(14,165,233,0.02)); padding:10px;border-radius:8px;color:#eaf6ff}
+    footer{color:var(--muted);font-size:13px;margin-top:18px}
+    .toc a{display:block;padding:6px 0;color:#cfe9ff}
+    .small{font-size:13px;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>EpisLang — Руководство (v1.0.7)</h1>
+        <div class="meta">Автор: Егимбаев Дамир • Документация для релиза 1.0.7</div>
+        <div class="meta"> </div>
+        <div class="meta">Разработан в студий <strong>DamirDev</strong> / Проект передан студии <strong>EpisLangProject</strong> </div>
+        <div class="meta"> </div>
+        <div class="meta">Epis - от греческого <strong>epis</strong>teme(<strong>επισ</strong>τήμη), наука/знания</div>
+        <div class="meta"> </div>
+        <div class="meta">Язык разработан 4 июля 2025 года. Когда главный разработчик Егимбаев Дамир столкнулся с проблемой - он хотел разработать сложный калькулятор для вычеслений любых видов, без графического интерфейса в консоли, однако пайтон плохо работал с дробными числами из-за стандарта IEEE754, и Дамиру пришлось разработать собственные типы данных сначало для десятичных дробей, а позже и обычных дробей, однако Дамир так и не реализовал калькулятор, и решил вместо этого прикрутить пару модулей, REPL, и работу с файлами, и так получился полноценный скриптовый язык для математических вычеслений. Синтаксис очень не стабилен не смотря на то что язык уже в релизе, после окончательной стабилизаций стандарта синтаксиса будет версия 1.0</div>
+      </div>
+    </header>
+
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="#overview">Обзор</a>
+      <a href="#types">Типы</a>
+      <a href="#usage">Работа с типами</a>
+      <a href="#modules">Модули</a>
+      <a href="#operators">Операторы</a>
+      <a href="#vars">Переменные и классы</a>
+      <a href="#control">Условия и циклы</a>
+      <a href="#modpy">mod.py</a>
+      <a href="#io">Встроенные модули</a>
+    </nav>
+
+    <div class="card">
+      <h2 id="overview">Обзор</h2>
+      <p class="small">Epis (EpisLang) — язык, написанный на Python 3.12.9, ориентирован на точные математические вычисления. Эта документация предназначена для версии <strong>v1.0.7</strong>.</p>
+      <div class="note">Полная документация: <a href="docs.txt">docs.txt</a></div>
+    </div>
+
+    <div class="card">
+      <h2 id="types">Типы данных</h2>
+      <p>Встроенные (унаследованы от Python): <code>str, int, float, complex, list, tuple, set, dict</code>.</p>
+      <p>Собственные типы Epis:</p>
+      <ul>
+        <li><strong>number</strong> — десятичные дроби с фиксированной точностью (аналог <code>decimal.Decimal</code>). Поддерживает литерал с суффиксом <code>N</code> (например, <code>10N</code>, <code>0.1N</code>) и указание точности через <code>:</code> (<code>0.33:1N</code>).</li>
+        <li><strong>frac</strong> — точные дроби, поддерживает и простые дроби, и периодические десятичные записи (например <code>0.(3)F → 1/3</code>). Имеет литерал <code>F</code>.</li>
+        <li><strong>wlist</strong> — расширенный список с дополнительными операциями (groupby, арифметические операции над длиной/фрагментами, и т.д.).</li>
+        <li><strong>xc</strong> — комплексный тип на основе <code>number</code> (фиксированная точность для действительной и мнимой частей).</li>
+      </ul>
+
+      <p class="small">Рекомендация: для сохранения точности числа рекомендуется создавать <code>number</code> из строк: <code>num('0.1')</code>.</p>
+    </div>
+
+    <div class="card">
+      <h2 id="usage">Работа с типами — примеры</h2>
+      <pre><code>// Number
+a = num('0.1')
+b = num(7.8, 1)   // второе — точность
+c = 10N
+d = 0.1N
+e = 0.33:1N
+
+// Frac
+a = frac('619/913')
+b = frac(23)      // 23/1
+c = frac('0.(1)')  // 1/9
+h = 0.(3)F         // 1/3
+
+// wlist
+a = wlist([0,1,2,3,4,5,6,7,8,9])
+a.groupby(lambda x: x%3+1)  // {1:[0,3,6,9],...}
+</code></pre>
+
+      <p class="small">Заметь: при операциях смешанных типов (например <code>number + frac</code>) рекомендуется явно приводить типы — поведение может требовать приведения через <code>.frac()</code> или <code>.numb()</code>.</p>
+    </div>
+
+    <div class="card">
+      <h2 id="modules">Модули: use() и unpack()</h2>
+      <p>В Epis стандартный синтаксис языка разделён на модули — часть стандартной библиотеки доступна без явного импорта. Для внешних модулей используются <code>use()</code> и <code>unpack()</code>.</p>
+
+      <pre><code>// use возвращает модуль (как объект/класс)
+re = use('re')
+mylib = use('C:/path/to/lib.py')
+
+// импорт конкретных атрибутов
+sin, cos = use('math', ('sin', 'cos'))
+
+// unpack распаковывает имена в глобальную область
+unpack(io)
+print('Теперь print доступен напрямую')
+</code></pre>
+
+      <p class="small">Осторожно: <code>unpack()</code> перезаписывает имена в глобальном пространстве — потенциальный источник конфликтов.</p>
+    </div>
+
+    <div class="card">
+      <h2 id="operators">Операторы (кратко)</h2>
+      <p>Практически все операторы совпадают с Python. Дополнения:</p>
+      <ul>
+        <li>Лямбда: <code>(x,y) => (x+y)</code></li>
+        <li>Null-coalescing: <code>(e ? 6)</code> — возвращает <code>e</code>, если не <code>None</code>, иначе <code>6</code></li>
+        <li>Присваивание с coalescing: <code>a ?= b</code> (эквивалент <code>a = (a ? b)</code>)</li>
+        <li>Матричное умножение: <code>a @ b</code></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2 id="vars">Переменные и строгая типизация</h2>
+      <p>Динамические переменные работают как в Python. Для строгих типов используется наследование от <code>Var</code>:</p>
+      <pre><code>class C(Var):
+    pi = 3.14
+    a : int
+    b : num = 5.8
+    y : list[int]
+
+c = C()
+c.a = 12    // ok
+c.pi = 2.8  // ошибка — константа
+</code></pre>
+
+      <p class="small">Функции могут иметь аннотацию типов аргументов и типа возврата — при несовпадении выбрасывается ошибка.</p>
+    </div>
+
+    <div class="card">
+      <h2 id="control">Условия и циклы</h2>
+      <p>Поддерживаются <code>if/elif/else</code> и два базовых цикла: <code>while</code> и <code>for</code>. Внимание — семантика <code>range</code> отличается:</p>
+      <pre><code>// while
+i = 0
+while i &lt; 3:
+    io.print('Hello')
+    i += 1
+
+// for
+for i in range(0,1,3):
+    io.print('Hello')
+
+// В Epis: range(start, step, stop)
+</code></pre>
+      <p class="note">Важно: порядок аргументов в <code>range</code> — <strong>start, step, stop</strong>. Это отличается от Python.</p>
+    </div>
+
+    <div class="card">
+      <h2 id="modpy">Модуль <code>mod.py</code></h2>
+      <p>Утилитарный модуль с четырьмя подсистемами: <code>RANDOM</code>, <code>TIME</code>, <code>SYS</code>, <code>COLORS</code>.</p>
+      <pre><code>random = use('mod.py').RANDOM()
+random.randint(1,100)
+
+time = use('mod.py').TIME()
+time.sleep(2)
+
+colors = use('mod.py').COLORS()
+colors.red('Hi!')
+</code></pre>
+    </div>
+
+    <div class="card">
+      <h2 id="io">IO, Filework, Math, JSON (глава 10)</h2>
+
+      <h3>IO</h3>
+      <pre><code>io.print('Hello')
+io.input('Name: ')
+io.ask('choice', ('a','b'))
+io.write('*','Hello',str)
+io.read('*','>>>',int)
+io.map(func, arg)
+io.loading(steps, symbols, qw, s)
+</code></pre>
+
+      <h3>Filework</h3>
+      <pre><code>f = filework(mode)    // mode: 'strict' | 'free'
+f.exists(path)
+f.delete(path, val)
+f.isdir(path)
+</code></pre>
+
+      <h3>Math</h3>
+      <pre><code>math.pi    // pi с высокой точностью
+math.sqr(x)
+math.sqrt(x)
+math.fact(x)
+math.sum(args)
+math.eq(x,y,p)  // abs(x-y) &lt; p
+</code></pre>
+
+      <h3>JSON</h3>
+      <pre><code>json.loads(str)
+json.dumps(obj)
+</code></pre>
+</body>
+</html>

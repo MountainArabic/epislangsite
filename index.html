@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EpisLang — Главная</title>
+  <style>
+    :root{--bg:#0f1720;--card:#0b1220;--muted:#94a3b8;--accent:#7c3aed;--mono:ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace}
+    body{font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:linear-gradient(180deg,#071029 0%, #081226 100%); color:#e6eef8; margin:0; padding:32px}
+    .wrap{max-width:1000px; margin:0 auto}
+    header{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+    header h1{margin:0;font-size:28px}
+    header .meta{color:var(--muted); font-size:13px}
+    nav{background:rgba(255,255,255,0.02); padding:12px;border-radius:8px;margin-bottom:18px}
+    nav a{color:#bfe1ff; text-decoration:none; display:inline-block; margin-right:12px; font-size:14px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:18px; border-radius:10px; box-shadow:0 6px 18px rgba(2,6,23,0.6); margin-bottom:14px; transition: transform .2s}
+    .card:hover{transform: translateY(-4px);}
+    h2{margin-top:0}
+    a.button{display:inline-block;padding:10px 18px;background:var(--accent);color:#fff;border-radius:8px;text-decoration:none;margin-top:8px;font-weight:500;transition: background .2s}
+    a.button:hover{background:#5b21b6}
+    footer{color:var(--muted);font-size:13px;margin-top:28px;text-align:center}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>EpisLang — Главная</h1>
+        <div class="meta">Язык программирования EpisLang • Документация v1.0.7</div>
+      </div>
+    </header>
+
+    <div class="card">
+      <h2>Документация</h2>
+      <p>Полное руководство по языку EpisLang.</p>
+      <a href="docs.html" class="button">Открыть docs.html(краткая документация)</a>
+      <a href="docs.txt" class="button">Открыть docs.txt(Оффициальная документация)</a>
+      <a href="docs.docx" class="button">Открыть docs.docx(Документация на хакатон)</a>
+      <a href="episins.exe" class="button">Установить</a>
+      <a href="epis_ide.exe" class="button">Установить IDE</a>
+      <a href="guide.html" class="button">Гайд по установке</a>
+      <a href="https://drive.google.com/drive/folders/1KdLm70-sTEzT1CEUSXlYPkk6ivUPDr_B?usp=drive_link" class="button">Все версий</a>
+    </div>
+    <div class="card">
+      <h2>Что добавлено? : 1.0.7 <!--<a href="dan.html">!</a>--></h2>
+      <ul>
+        <li>Улучшение use</li>
+        <li>Оптимизация</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Обзор</h2>
+      <p>EpisLang — язык, написанный на Python 3.12.9, ориентированный на точные математические вычисления. Используйте ссылки выше для подробной документации.</p>
+      <p>Язык EpisLang ориентирован на студентов и ученых</p>
+      <h6>Для студентов - для их обучения мы предоставляем удобный и понятных синтаксис для построения алгоритмов, а так-же решение всех математических проблем пайтона, что-бы новички не заморачивались с проблемами IEEE754 и с внешними гигантскими модулями для точных чисел</h6>
+      <h6>Для ученых - мы предоставляем короткий но структурированный синтаксис языка и точные типы, а также работаем над новым модулем formula.py для еще более улучшенной работой с данными и научными данными</h6>
+    </div>
+    <footer>
+      &copy; 2025 DamirDev / EpisLangProject
+    </footer>
+  </div>
+</body>
+</html>
