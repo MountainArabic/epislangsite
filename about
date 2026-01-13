@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EpisLang — О нас</title>
+  <style>
+    :root{--bg:#0f1720;--card:#0b1220;--muted:#94a3b8;--accent:#7c3aed}
+    body{font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial; background:linear-gradient(180deg,#071029 0%, #081226 100%); color:#e6eef8; margin:0; padding:32px}
+    .wrap{max-width:1000px;margin:0 auto}
+    header{margin-bottom:20px}
+    h1{margin:0;font-size:28px}
+    .meta{color:var(--muted);font-size:13px}
+    nav{background:rgba(255,255,255,0.02); padding:12px;border-radius:8px;margin:18px 0}
+    nav a{color:#bfe1ff;text-decoration:none;margin-right:12px;font-size:14px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:18px;border-radius:10px;box-shadow:0 6px 18px rgba(2,6,23,0.6);margin-bottom:14px}
+    footer{color:var(--muted);font-size:13px;margin-top:28px;text-align:center}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>EpisLang — О проекте</h1>
+    <div class="meta">Кто мы и зачем это всё</div>
+  </header>
+
+  <nav>
+    <a href="/">Главная</a>
+    <a href="about.html">О нас</a>
+    <a href="contacts.html">Контакты</a>
+    <a href="news">Новости</a>
+  </nav>
+
+  <div class="card">
+    <h2>Что такое EpisLang?</h2>
+    <p><b>EpisLang</b> — экспериментальный язык программирования, написанный на Python, ориентированный на точные математические вычисления и удобство работы с числами.</p>
+  </div>
+
+  <div class="card">
+    <h2>Цели проекта</h2>
+    <ul>
+      <li>Избавить от проблем IEEE754</li>
+      <li>Дать простой и читаемый синтаксис</li>
+      <li>Сделать язык удобным для обучения</li>
+      <li>Упростить научные вычисления</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Для кого</h2>
+    <p><b>Студенты</b> — изучение алгоритмов без боли с типами и округлениями.</p>
+    <p><b>Учёные</b> — точные типы данных и будущий модуль <code>formula.py</code>.</p>
+  </div>
+
+  <footer>
+    &copy; 2025 DamirDev / EpisLangProject
+  </footer>
+</div>
+</body>
+</html>
